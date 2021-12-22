@@ -20,7 +20,7 @@ I have structured my data directory within my **ABR_Tools** local folder. The da
 │   │   │	│	│	├── ---.mat
 ```
 
-**Note: since these datasets can be quite large, any directory titled  ``Data`` will be ignored in commits. You should have your own data in a local directory. **This is specified in the ``.gitignore`` file.
+**Note: since these datasets can be quite large, any directory titled  ``Data`` will be ignored in commits. You should have your own data in a local directory.** This is specified in the ``.gitignore`` file.
 
 **Currently, the pre/post directories do not require a specific directory structure and use user-specified directories. However, future versions of this code may require the above structure to work.** The directories are specified in ``pre_data_folder`` and ``post_data_folder`` within the code.
 
