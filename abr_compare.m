@@ -206,30 +206,30 @@ legend(leg);
 xlabel('Time (s)');
 set(gcf,'Position',[20,20,800,1200]);
 xticklabels(time_ticks)
-text(-.002,6,0,'Amplitude (\muV)','Rotation',90);
+text(-.002,9,0,'Amplitude (\muV)','Rotation',90);
 
 figure(h2);
 legend(leg);
 xlabel('Time (s)');
 set(gcf,'Position',[830,1230,800,1200]);
 xticklabels(time_ticks)
-text(-.002,6,0,'Amplitude (\muV)','Rotation',90);
+text(-.002,9,0,'Amplitude (\muV)','Rotation',90);
 
 figure(h3);
 legend('Difference');
 xlabel('Time (s)');
 set(gcf,'Position',[830,1230,800,1200]);
 xticklabels(time_ticks)
-text(-.002,6,0,'Amplitude (\muV)','Rotation',90);
+text(-.002,9,0,'Amplitude (\muV)','Rotation',90);
 
 figure(h4);
 legend('Difference');
 xlabel('Time (s)');
 set(gcf,'Position',[830,1230,800,1200]);
 xticklabels(time_ticks)
-text(-.002,6,0,'Amplitude (\muV)','Rotation',90);
+text(-.002,9,0,'Amplitude (\muV)','Rotation',90);
 
 %% Figure Exporting in high quality (uncomment if exporting)
 % 
-print(h1,'click_comparison','-r300','-dpng');
-print(h2,'4k_comparison','-r300','-dpng');
+% print(h1,'click_comparison','-r300','-dpng');
+% print(h2,'4k_comparison','-r300','-dpng');

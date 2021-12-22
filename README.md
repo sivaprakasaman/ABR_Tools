@@ -1,6 +1,6 @@
 # ABR_Tools
 
-This repository has been designed to quickly visualize ABR data, and will be edited to make meaningful computations (i.e. peak-peaking, threshold calculations, etc.). Our data is usually collected in a custom ```.mat``` structure with ABR waveforms and necessary metadata (i.e. Sampling Rate) stored in sub-structures.
+This repository has been designed to quickly visualize ABR data, and will be edited to make meaningful computations (i.e. peak-peaking, threshold calculations, etc.). Our data is usually collected in a custom ``.m`` structure with ABR waveforms and necessary metadata (i.e. Sampling Rate) stored in sub-structures.
 
 To begin, be sure that you are aware how data is pulled into the code. 
 
@@ -13,11 +13,11 @@ I have structured my data directory within my **ABR_Tools** local folder. The da
 │   │   ├── Chin
 │   │   │	├── Pre
 │   │   │	│	├── Baselines
-│   │   │	│	│	├── [picnumber]*ABR_4000.mat
-│   │   │	│	│	├── [picnumber]*ABR_click.mat
+│   │   │	│	│	├── [picnumber]*ABR_4000.m
+│   │   │	│	│	├── [picnumber]*ABR_click.m
 │   │   │	├── Post
 │   │   │	│	├── 2weeksPostCA
-│   │   │	│	│	├── ---.mat
+│   │   │	│	│	├── ---.m
 ```
 
 **Note: since these datasets can be quite large, any directory titled  ``Data`` will be ignored in commits. You should have your own data in a local directory.** This is specified in the ``.gitignore`` file.
