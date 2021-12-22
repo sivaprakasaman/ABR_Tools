@@ -5,7 +5,7 @@ Data/
 __pycache__/
 *.py[cod]
 *$py.class
-
+*.asv
 # C extensions
 *.so
 
