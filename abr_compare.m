@@ -16,7 +16,7 @@ post_data_folder = 'Data/Q405/post/2weeksPostCA';
 %Files with our respective data/probe placements
 
 leg = ["Baseline","Carbo-2Wks"];
-scaling = [-1,1];
+scaling = [1,-1];
 
 %SPECIFY THE PIC NUMS YOU NEED!
 pre_click = [4:12];
@@ -28,13 +28,13 @@ post_4k = [13:21];
 % Looking at carbo 2wks vs carbo few months
 % pre_click = [4:9,12];
 % pre_4k = [13:18,21];
-
+% 
 % post_click = [4:10];
 % post_4k = [11:17];
 
 %Filtering/Resampling
 fs = 8e3; %to resample to
-cutoff = [300,3e3];
+cutoff = [100,3e3];
 
 [b,a] = butter(8,[cutoff(1),cutoff(2)]/(fs/2));
 
@@ -133,7 +133,7 @@ cd(cwd)
 
 %% Plotting
 time_ticks = [0:0.005:0.03];
-ylims = [-0.6,0.6];
+ylims = [-0.9,0.9];
 %click
 h1 = figure;
 %4k
@@ -231,5 +231,5 @@ text(-.002,6,0,'Amplitude (\muV)','Rotation',90);
 
 %% Figure Exporting in high quality (uncomment if exporting)
 % 
-% print(h1,'click_comparison','-r300','-dpng');
-% print(h2,'4k_comparison','-r300','-dpng');
+print(h1,'click_comparison','-r300','-dpng');
+print(h2,'4k_comparison','-r300','-dpng');
