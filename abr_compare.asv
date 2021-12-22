@@ -129,7 +129,7 @@ cd(cwd)
 
 %% Plotting
 time_ticks = [0:0.005:0.03];
-ylims = [-0.6,0.6];
+ylims = [-0.5,0.5];
 %click
 h1 = figure;
 %4k
@@ -138,7 +138,6 @@ h2 = figure;
 h3 = figure;
 %4k difference
 h4 = figure;
-
 
 for i = 1:length(waterfall_db)
 
@@ -153,7 +152,6 @@ for i = 1:length(waterfall_db)
     xlim([0, length(pre_click_waves)/fs]);
     xticks(time_ticks)
     xticklabels('');
-    box on
 
     figure(h2);
     subplot(length(waterfall_db),1,i);
@@ -166,7 +164,7 @@ for i = 1:length(waterfall_db)
     xlim([0, length(pre_4k_waves)/fs]);
     xticks(time_ticks)
     xticklabels('');
-    box on
+
     %correct for any length differences
     difflength = min(length(post_click_waves),length(pre_click_waves));
 
@@ -180,7 +178,6 @@ for i = 1:length(waterfall_db)
     xlim([0, difflength/fs]);
     xticks(time_ticks)
     xticklabels('');
-    box on
 
     figure(h4);
     subplot(length(waterfall_db),1,i);
@@ -192,7 +189,6 @@ for i = 1:length(waterfall_db)
     xlim([0, difflength/fs]);
     xticks(time_ticks)
     xticklabels('');
-    box on
 
 end 
 
@@ -202,28 +198,26 @@ legend(leg);
 xlabel('Time (s)');
 set(gcf,'Position',[20,20,800,1200]);
 xticklabels(time_ticks)
-text(-.002,6,0,'Amplitude (\muV)','Rotation',90);
+text(-.00)
 
 figure(h2);
 legend(leg);
 xlabel('Time (s)');
 set(gcf,'Position',[830,1230,800,1200]);
+ylabel('Amplitude \muV')
 xticklabels(time_ticks)
-text(-.002,6,0,'Amplitude (\muV)','Rotation',90);
 
 figure(h3);
 legend('Difference');
 xlabel('Time (s)');
 set(gcf,'Position',[830,1230,800,1200]);
 xticklabels(time_ticks)
-text(-.002,6,0,'Amplitude (\muV)','Rotation',90);
 
 figure(h4);
 legend('Difference');
 xlabel('Time (s)');
 set(gcf,'Position',[830,1230,800,1200]);
 xticklabels(time_ticks)
-text(-.002,6,0,'Amplitude (\muV)','Rotation',90);
 
 %% Figure Exporting (uncomment if exporting)
 
