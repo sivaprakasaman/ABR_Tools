@@ -18,10 +18,6 @@ post_data_folder = 'Data/Q405/post/2weeksPostCA';
 leg = ["Baseline","Carbo-2Wks"];
 scaling = [-1,1];
 
-%Waterfall
-waterfall_db = 0:10:80;
-%waterfall_db = [0:10:50,80];
-
 %SPECIFY THE PIC NUMS YOU NEED!
 pre_click = [4:12];
 pre_4k = [13:21];
@@ -58,6 +54,7 @@ for i = 1:length(pre_click)
     num_click = sprintf('%04d',pre_click(i));
     run(['a',num_click,'_ABR_click']);
     fs_run = floor(ans.AD_Data.SampleRate);
+    level_click(i) = ans.Stimuli.MaxdBSPLCalib-ans.Stimuli.atten_dB;
     abr = ans.AD_Data.AD_Avg_V;
     gain = 1e6/ans.AD_Data.Gain;
     if(iscell(abr))
@@ -72,6 +69,7 @@ for i = 1:length(pre_click)
     %4k
     num_4k = sprintf('%04d',pre_4k(i));
     run(['a',num_4k,'_ABR_4000']);
+    level_4k(i) = ans.Stimuli.MaxdBSPLCalib-ans.Stimuli.atten_dB;
     fs_run = floor(ans.AD_Data.SampleRate);
     gain = 1e6/ans.AD_Data.Gain;
     abr = ans.AD_Data.AD_Avg_V;
@@ -98,6 +96,9 @@ for i = 1:length(post_click)
     fs_run = floor(ans.AD_Data.SampleRate);
     abr = ans.AD_Data.AD_Avg_V;
     gain = 1e6/ans.AD_Data.Gain;
+    if(round(ans.Stimuli.MaxdBSPLCalib-ans.Stimuli.atten_dB) ~= round(level_click(i)))
+        error('Click Levels are not matched pre vs post. Check Pic nums.')
+    end
     if(iscell(abr))
        abr = abr{1};
        if(iscell(abr))
@@ -112,6 +113,9 @@ for i = 1:length(post_click)
     fs_run = floor(ans.AD_Data.SampleRate);
     gain = 1e6/ans.AD_Data.Gain;
     abr = ans.AD_Data.AD_Avg_V;
+    if(round(ans.Stimuli.MaxdBSPLCalib-ans.Stimuli.atten_dB) ~= round(level_4k(i)))
+        error('4k Levels are not matched pre vs post. Check Pic nums.')
+    end
     if(iscell(abr))
        abr = abr{1};
        if(iscell(abr))
@@ -140,15 +144,15 @@ h3 = figure;
 h4 = figure;
 
 
-for i = 1:length(waterfall_db)
+for i = 1:length(level_click)
 
     figure(h1);
-    subplot(length(waterfall_db),1,i);
+    subplot(length(level_click),1,i);
     hold on
     plot((1:length(pre_click_waves))/fs,pre_click_waves(:,i),'LineWidth',1.5)
     plot((1:length(post_click_waves))/fs,post_click_waves(:,i),'LineWidth',1.5);
     hold off
-    title(strcat('Click Waterfall | ',num2str(waterfall_db(i)), ' dB'))
+    title(strcat('Click Waterfall | ',num2str(round(level_click(i))), ' dB'))
     ylim(ylims)
     xlim([0, length(pre_click_waves)/fs]);
     xticks(time_ticks)
@@ -156,12 +160,12 @@ for i = 1:length(waterfall_db)
     box on
 
     figure(h2);
-    subplot(length(waterfall_db),1,i);
+    subplot(length(level_click),1,i);
     hold on
     plot((1:length(pre_4k_waves))/fs,pre_4k_waves(:,i),'LineWidth',1.5)
     plot((1:length(post_4k_waves))/fs,post_4k_waves(:,i),'LineWidth',1.5);
     hold off
-    title(strcat('4k Waterfall | ',num2str(waterfall_db(i)), ' dB'))
+    title(strcat('4k Waterfall | ',num2str(round(level_4k(i))), ' dB'))
     ylim(ylims)
     xlim([0, length(pre_4k_waves)/fs]);
     xticks(time_ticks)
@@ -171,11 +175,11 @@ for i = 1:length(waterfall_db)
     difflength = min(length(post_click_waves),length(pre_click_waves));
 
     figure(h3);
-    subplot(length(waterfall_db),1,i);
+    subplot(length(level_click),1,i);
     hold on
     plot((1:difflength)/fs,pre_click_waves(1:difflength,i)-post_click_waves(1:difflength,i),'k','LineWidth',1.5)
     hold off
-    title(strcat('Click Waterfall | Pre-Post |',num2str(waterfall_db(i)), ' dB'))
+    title(strcat('Click Waterfall | Pre-Post |',num2str(round(level_click(i))), ' dB'))
     ylim(ylims)
     xlim([0, difflength/fs]);
     xticks(time_ticks)
@@ -183,11 +187,11 @@ for i = 1:length(waterfall_db)
     box on
 
     figure(h4);
-    subplot(length(waterfall_db),1,i);
+    subplot(length(level_4k),1,i);
     hold on
     plot((1:difflength)/fs,pre_4k_waves(1:difflength,i)-post_4k_waves(1:difflength,i),'k','LineWidth',1.5)
     hold off
-    title(strcat('4k Waterfall | Pre-Post |',num2str(waterfall_db(i)), ' dB'))
+    title(strcat('4k Waterfall | Pre-Post |',num2str(round(level_4k(i))), ' dB'))
     ylim(ylims)
     xlim([0, difflength/fs]);
     xticks(time_ticks)
@@ -225,7 +229,7 @@ set(gcf,'Position',[830,1230,800,1200]);
 xticklabels(time_ticks)
 text(-.002,6,0,'Amplitude (\muV)','Rotation',90);
 
-%% Figure Exporting (uncomment if exporting)
-
-print(h1,'click_comparison','-r300','-dpng');
-print(h2,'4k_comparison','-r300','-dpng');
+%% Figure Exporting in high quality (uncomment if exporting)
+% 
+% print(h1,'click_comparison','-r300','-dpng');
+% print(h2,'4k_comparison','-r300','-dpng');
