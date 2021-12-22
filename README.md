@@ -8,6 +8,7 @@ I have structured my data directory within my **ABR_Tools** local folder. The da
 
 ```bash
 ├── ABR_Tools
+│   ├── abr_compare.m
 │   ├── Data (Data should be stored locally, not uploaded to git)
 │   │   ├── Chin
 │   │   │	├── Pre
@@ -17,7 +18,6 @@ I have structured my data directory within my **ABR_Tools** local folder. The da
 │   │   │	├── Post
 │   │   │	│	├── 2weeksPostCA
 │   │   │	│	│	├── ---.mat
-│   ├── abr_compare.m
 ```
 
 **Note: since these datasets can be quite large, any directory titled  ``Data`` will be ignored in commits. You should have your own data in a local directory. **This is specified in the ``.gitignore`` file.
