@@ -9,13 +9,15 @@ close all
 
 %TODO: Generalize this for a given data directory structure!
 
-%Script written to compare ABR Data:
+%Script written to compare ABR/ECochG Data:
 pre_data_folder = 'Data/Q405/pre/Baselines';
 post_data_folder = 'Data/Q405/post/2weeksPostCA';
 
 %Files with our respective data/probe placements
 
-leg = ["Baseline","Carbo-2Wks"];
+leg = ["Baseline","Carbo-2weeksPostCA"];
+
+%1st value is for pre 2nd value for post
 scaling = [1,-1];
 
 %SPECIFY THE PIC NUMS YOU NEED!
@@ -79,7 +81,7 @@ for i = 1:length(pre_click)
             abr = abr{1};
        end
     end
-    pre_4k_waves(:,i) = gain*scaling(2)*(resample(abr,fs,fs_run)-mean(abr));
+    pre_4k_waves(:,i) = gain*scaling(1)*(resample(abr,fs,fs_run)-mean(abr));
     clear abr
 end
 
